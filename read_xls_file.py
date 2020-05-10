@@ -42,6 +42,8 @@ class ReadExcel:
                 file.writelines(row['Email'] + '\n\n\n')
                 file.write('Privacy Policy :\n\n')
                 file.writelines(row['Privacy Policy'] + '\n\n\n')
+                file.write('Content Rating Email :\n\n')
+                file.writelines(row['Content Rating Email'] + '\n\n\n')
                 file.write('Additional Information :\n\n')
                 file.writelines(row['Additional Information'])
         except FileNotFoundError:
@@ -56,6 +58,6 @@ if __name__ == "__main__":
     os.mkdir(dir_name)
     excel_folder = 'D:\\DRL ORG\\Downloads\\s3_upload_data_OnlyDRL_Set4.xls'
     sheet_name = 'practiceplusapps5_Set4'
-    start_from = 0
-    end_till = 5
+    start_from = 6
+    end_till = 10
     excel.read_data_from_excel(dir_name, excel_folder, sheet_name, start_from, end_till)
