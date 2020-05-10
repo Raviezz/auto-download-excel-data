@@ -4,6 +4,7 @@ pip install -r requirements.txt
 import pandas as pd
 import os
 import requests
+import mimetypes
 import datetime as time
 
 
@@ -23,13 +24,15 @@ class ReadExcel:
                 image_512_512 = requests.get(row['Graphic assets(512*512)'])
                 image_512_1024 = requests.get(row['Feature graphic(1024*500)'])
                 consent_form = requests.get(row['Consent Form'])
+                content_type = consent_form.headers['content-type']
+                extension = mimetypes.guess_extension(content_type)
                 open(path + '\\' + row['Title'] + '.apk', 'wb').write(apk_file.content)
                 print(row['Android APK Link'])
                 open(path + '\\' + row['Title'] + '512_512.png', 'wb').write(image_512_512.content)
                 print(row['Graphic assets(512*512)'])
                 open(path + '\\' + row['Title'] + '1024_512.png', 'wb').write(image_512_1024.content)
                 print(row['Feature graphic(1024*500)'])
-                open(path + '\\' + row['Title'] + '.pdf', 'wb').write(consent_form.content)
+                open(path + '\\' + row['Title'] + extension, 'wb').write(consent_form.content)
                 print(row['Consent Form'])
                 file = open(path + '\\doc_details.txt', 'w+')
                 file.write('App Title:\n\n')
